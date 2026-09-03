@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>VKU Field Survey</title>
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#1c3664" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Top Header Bar -->
+    <header class="app-header">
+      <div class="header-content">
+        <h1>VKU Survey</h1>
+        <div class="status-badge" id="network-badge">
+          <span class="status-dot"></span>
+          <span id="network-status" class="online">Online</span>
+        </div>
+      </div>
+      <div class="header-decoration"></div>
+    </header>
+
+    <div class="container">
+      <main class="form-card">
+        <form id="survey-form">
+          <div class="form-header">
+            <h2>Facility Inspection</h2>
+            <p>Please fill out the details below.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="facility-name">Facility Name</label>
+            <input type="text" id="facility-name" name="facility-name" placeholder="e.g.,Chair from Room 101..." required />
+          </div>
+
+          <div class="form-group">
+            <label for="location-area">Location / Area</label>
+            <select id="location-area" name="location-area" required>
+              <option value="" disabled selected>Select an area...</option>
+              <option value="Building V">Building V</option>
+              <option value="Building K">Building K</option>
+              <option value="Campus Grounds">Campus Grounds</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="condition-status">Condition</label>
+            <select id="condition-status" name="condition-status" required>
+              <option value="Good">Good</option>
+              <option value="Needs Repair">Needs Repair</option>
+              <option value="Critical">Critical</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Additional Notes</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Describe the issue in detail..."></textarea>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Buttons for Capacitor Plugins -->
+          <div class="action-buttons">
+            <button type="button" id="btn-camera" class="btn-secondary">
+              <span class="icon">📸</span> Photo
+            </button>
+            <button type="button" id="btn-gps" class="btn-secondary">
+              <span class="icon">📍</span> Location
+            </button>
+          </div>
+
+          <!-- Previews -->
+          <div id="photo-preview" class="preview-container"></div>
+          <div id="gps-preview" class="preview-container"></div>
+
+          <button type="submit" class="btn-primary">Submit Report</button>
+        </form>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
