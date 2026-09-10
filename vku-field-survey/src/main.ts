@@ -5,7 +5,7 @@ import { Geolocation } from '@capacitor/geolocation';
 initDB();
 
 const surveyForm = document.getElementById('survey-form') as HTMLFormElement;
-const networkStatusLabel = document.getElementById('network-status');
+
 
 // --- Form Handling ---
 if (surveyForm) {
