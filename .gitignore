@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Production builds & dist
+dist/
+*/dist/
+dist-ssr/
+build/
+*/build/
+.gradle/
+*/.gradle/
+
+# Android native build files & local config
+local.properties
+*/local.properties
+.externalNativeBuild/
+.cxx/
+
+# IDE & System
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+*.log

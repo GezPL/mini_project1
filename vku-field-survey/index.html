@@ -20,13 +20,74 @@
             <h1 class="brand-app">Field Survey</h1>
           </div>
         </div>
-        <div class="status-badge" id="network-badge">
-          <span class="status-dot"></span>
-          <span id="network-status" class="status-label">Online</span>
+        <div class="header-actions">
+          <button type="button" id="btn-open-install-modal" class="btn-header-install" title="Cài đặt hoặc tải ứng dụng">
+            <span>📲</span> Tải App
+          </button>
+          <div class="status-badge" id="network-badge">
+            <span class="status-dot"></span>
+            <span id="network-status" class="status-label">Online</span>
+          </div>
         </div>
       </div>
       <div class="header-decoration"></div>
     </header>
+
+    <!-- Modal Cài đặt / Tải ứng dụng APK & PWA -->
+    <div id="install-modal" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <span class="modal-icon">📲</span>
+            <h3 class="modal-title">Cài đặt ứng dụng VKU Survey</h3>
+          </div>
+          <button type="button" id="btn-close-install-modal" class="modal-close" aria-label="Đóng">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p class="modal-intro">Bạn có thể cài đặt và sử dụng VKU Survey như một ứng dụng di động thông thường theo 2 cách dưới đây:</p>
+
+          <!-- Lựa chọn 1: Tải APK Android -->
+          <div class="install-option-card highlight">
+            <div class="option-badge">Khuyên dùng cho Android</div>
+            <div class="option-header">
+              <span class="option-icon">🤖</span>
+              <div>
+                <h4 class="option-title">Cài đặt ứng dụng Android (File APK)</h4>
+                <p class="option-desc">Ứng dụng độc lập, chụp ảnh & GPS nhanh, dùng offline 100%</p>
+              </div>
+            </div>
+            <a href="/vku-survey.apk" download="vku-survey.apk" id="btn-download-apk" class="btn-download-apk">
+              <span>⬇️</span> Tải file APK Android (8.7 MB)
+            </a>
+            <div class="install-guide">
+              <strong>Hướng dẫn cài đặt trên điện thoại:</strong>
+              <ol>
+                <li>Nhấn nút <strong>"Tải file APK Android"</strong> ở trên.</li>
+                <li>Mở file <code>vku-survey.apk</code> từ thanh thông báo hoặc thư mục <em>Tệp đã tải xuống</em>.</li>
+                <li>Chọn <strong>Cài đặt</strong> (nếu có cảnh báo bảo mật, chọn <em>Vẫn cài đặt / Cho phép từ nguồn này</em>).</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Lựa chọn 2: Cài đặt PWA tức thì -->
+          <div class="install-option-card">
+            <div class="option-header">
+              <span class="option-icon">⚡</span>
+              <div>
+                <h4 class="option-title">Thêm vào Màn hình chính (PWA)</h4>
+                <p class="option-desc">Dùng ngay trên trình duyệt mà không cần tải file APK</p>
+              </div>
+            </div>
+            <button type="button" id="btn-pwa-install" class="btn-pwa-install">
+              <span>🚀</span> Cài đặt ứng dụng PWA
+            </button>
+            <p id="pwa-guide-text" class="pwa-hint">
+              Hoặc trên Chrome/Safari điện thoại, nhấn menu <strong>(⋮)</strong> hoặc <strong>Chia sẻ</strong> &rarr; chọn <strong>"Thêm vào Màn hình chính"</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Offline Notification Banner -->
     <div id="offline-banner" class="offline-banner hidden">
@@ -83,7 +144,7 @@
                 type="text"
                 id="specific-location"
                 name="specificLocation"
-                placeholder="VD: Phòng V.A102, Hành lang Tầng 3 Nhà K..."
+                placeholder="VD: Phòng V.A102..."
                 required
               />
             </div>
@@ -116,7 +177,7 @@
                 type="text"
                 id="facility-name"
                 name="facilityName"
-                placeholder="VD: Máy chiếu Panasonic, Quạt trần số 3, Bàn học dãy 2..."
+                placeholder="VD:Quạt trần số 3, Bàn học dãy 2..."
                 required
               />
             </div>

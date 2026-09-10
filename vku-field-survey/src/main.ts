@@ -438,6 +438,71 @@ async function syncAllDrafts(isAuto: boolean = false) {
 
 btnSyncAll?.addEventListener('click', () => syncAllDrafts(false));
 
+// --- Modal Cài đặt & Tải file APK / PWA ---
+const installModal = document.getElementById('install-modal') as HTMLElement;
+const btnOpenInstallModal = document.getElementById('btn-open-install-modal') as HTMLButtonElement;
+const btnCloseInstallModal = document.getElementById('btn-close-install-modal') as HTMLButtonElement;
+const btnDownloadApk = document.getElementById('btn-download-apk') as HTMLAnchorElement;
+const btnPwaInstall = document.getElementById('btn-pwa-install') as HTMLButtonElement;
+const pwaGuideText = document.getElementById('pwa-guide-text') as HTMLElement;
+
+let deferredPrompt: any = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Ngăn chặn prompt mặc định của trình duyệt để tự quản lý
+  e.preventDefault();
+  deferredPrompt = e;
+  if (btnPwaInstall) {
+    btnPwaInstall.innerHTML = '<span>🚀</span> Cài đặt ngay ứng dụng PWA';
+  }
+});
+
+btnOpenInstallModal?.addEventListener('click', () => {
+  installModal?.classList.remove('hidden');
+});
+
+btnCloseInstallModal?.addEventListener('click', () => {
+  installModal?.classList.add('hidden');
+});
+
+// Click ra ngoài thẻ modal để đóng
+installModal?.addEventListener('click', (e) => {
+  if (e.target === installModal) {
+    installModal.classList.add('hidden');
+  }
+});
+
+// Bấm Escape để đóng modal
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !installModal?.classList.contains('hidden')) {
+    installModal?.classList.add('hidden');
+  }
+});
+
+// Thông báo khi bấm tải APK
+btnDownloadApk?.addEventListener('click', () => {
+  showToast('Đang tải file vku-survey.apk (8.7 MB)... Mở file sau khi tải xong để cài đặt nhé!', 'success');
+});
+
+// Kích hoạt PWA Install
+btnPwaInstall?.addEventListener('click', async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      showToast('Cảm ơn bạn đã cài đặt VKU Field Survey!', 'success');
+      installModal?.classList.add('hidden');
+    }
+    deferredPrompt = null;
+  } else {
+    showToast('Trình duyệt hiện tại chưa hỗ trợ cài đặt trực tiếp. Vui lòng làm theo hướng dẫn bên dưới.', 'info');
+    if (pwaGuideText) {
+      pwaGuideText.style.color = 'var(--vku-blue)';
+      pwaGuideText.style.fontWeight = 'bold';
+    }
+  }
+});
+
 // --- Đăng Ký Service Worker (PWA) ---
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
